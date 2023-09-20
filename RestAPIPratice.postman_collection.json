@@ -1,0 +1,428 @@
+{
+	"info": {
+		"_postman_id": "5867a38a-d74a-4311-9986-47b2888ddb23",
+		"name": "RestAPIPratice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28940603"
+	},
+	"item": [
+		{
+			"name": "GET details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Should be 200\", () =>{\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"})\r",
+							"pm.test(\"responce time Should be below 1500ms\",() =>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Amployee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Responce Status should 200\" , () =>{\r",
+							"pm.expect(pm.response.code).to.eql(200)\r",
+							"} )\r",
+							"\r",
+							"pm.test(\"Body contains certain fileds\",() => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\",\"employee_name\",\"employee_salary\")\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/1",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "responce data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body should contains data\" , () => {\r",
+							"    pm.expect(responseJson.name).to.eql(\"Garrett Winters\");\r",
+							"    pm.expect(responseJson.salary).to.eql(170750);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/2",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Responce time with in limit ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code and tesponse time should with in limit\" , () =>{\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201])\r",
+							"})\r",
+							"pm.test(\"responce time with-in limit\" , () =>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.within(500,1500)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/15",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Responce code should be 200/201\" , () => {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"Responce time should be with in 500/1500\" , () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.within(500,1500);\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \r\n        \"name\": \"Adarsh\",\r\n        \"salary\": \"123\",\r\n        \"age\": \"23\"\r\n        \r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit details",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Adarsh Patro\",\"salary\":\"25000\",\"age\":\"27\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/update/3899",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"3899"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PayLoad Size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"   pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Payload size with in limit\",()=>{\r",
+							"    pm.expect(pm.response.responseSize).to.be.within(1000,2000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Payload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Payload size should not exceed limit\" ,() =>{\r",
+							"    pm.expect(pm.response.responseSize).to.be.below(200)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status should be 200\",()=>{\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/delete/22",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"22"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HEADER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Server name should be nginx\",()=>{\r",
+							"     pm.expect(pm.response.headers.get('Server')).to.eql('nginx/1.21.6')\r",
+							"     \r",
+							"})\r",
+							"pm.test(\"status code should be 200\",()=>{\r",
+							"pm.expect(pm.response.code).to.eql(200)\r",
+							"})\r",
+							"pm.test(\"host-header\" , () =>{\r",
+							"pm.expect(pm.response.headers.get(\"Content-Encoding\")).to.eql(\"gzip\")\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/11",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "offset",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employees?limit=10&offset=20",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
